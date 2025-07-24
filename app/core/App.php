@@ -7,7 +7,6 @@ use Symfony\Component\Yaml\Yaml;
 
 class App
 {
-
     private static array $dependencies;
 
     public static function getDependencie(ClassName $className): mixed
@@ -29,13 +28,16 @@ class App
         try {
             $resolvedArgs = [];
 
-            foreach ($arguments as $argName) {
-                $argClassName = ClassName::from($argName); 
-                $resolvedArgs[] = self::getDependencie($argClassName);
+            foreach ($arguments as $arg) {
+                if (is_string($arg) && str_starts_with($arg, '@')) {
+                    $argClassName = ClassName::from(substr($arg, 1)); 
+                    $resolvedArgs[] = self::getDependencie($argClassName);
+                } else {
+                    $resolvedArgs[] = $arg;
+                }
             }
-            
-            $reflector = new \ReflectionClass($classNameStr);
 
+            $reflector = new \ReflectionClass($classNameStr);
             return $reflector->newInstanceArgs($resolvedArgs);
         } catch (\ReflectionException $e) {
             throw new \Exception("Erreur de réflexion : " . $e->getMessage());

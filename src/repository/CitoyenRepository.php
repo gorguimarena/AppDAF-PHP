@@ -2,6 +2,7 @@
 namespace AppDAF\REPOSITORY;
 
 use AppDAF\CORE\App;
+use AppDAF\CORE\Database;
 use AppDAF\ENTITY\CitoyenEntity;
 use AppDAF\ENUM\ClassName;
 use PDO;
@@ -10,9 +11,9 @@ class CitoyenRepository extends CitoyenEntity
 {
     private PDO $pdo;
 
-    public function __construct()
+    public function __construct(Database $database)
     {
-        $this->pdo = App::getDependencie(ClassName::DATABASE)->getConnexion();
+        $this->pdo = $database->getConnexion();
     }
 
     public function selectByCni(string $cni): ?CitoyenEntity

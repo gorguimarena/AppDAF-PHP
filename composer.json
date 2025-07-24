@@ -15,5 +15,9 @@
         "cloudinary/cloudinary_php": "^3.1",
         "vlucas/phpdotenv": "^5.6",
         "symfony/yaml": "^7.3"
+    },
+    "scripts": {
+        "database:migrate": "php migration/migration.php",
+        "database:seeder": "php seeders/seeder.php"
     }
 }

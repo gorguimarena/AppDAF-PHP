@@ -1,7 +1,37 @@
-CITOYEN_CONTROLLER: AppDAF\CONTROLLER\CitoyenController
-DATABASE: AppDAF\CORE\Database
-CITOYEN_REPOSITORY: AppDAF\REPOSITORY\CitoyenRepository
-LOG_REPOSITOTY: AppDAF\REPOSITORY\LogRepository
-CITOYEN_SERVICE:  AppDAF\SERVICE\CitoyenService
-LOG_SERVICE:  AppDAF\SERVICE\LogService
-CLOUD_SERVICE:  AppDAF\SERVICE\CloudService
+DATABASE:
+  class: AppDAF\CORE\Database
+  argument: []
+
+CITOYEN_REPOSITORY:
+  class: AppDAF\REPOSITORY\CitoyenRepository
+  argument:
+    - "@DATABASE"
+
+LOG_REPOSITOTY:
+  class: AppDAF\REPOSITORY\LogRepository
+  argument:
+    - "@DATABASE"
+
+CITOYEN_SERVICE:
+  class: AppDAF\SERVICE\CitoyenService
+  argument:
+    - "@CITOYEN_REPOSITORY"
+
+LOG_SERVICE:
+  class: AppDAF\SERVICE\LogService
+  argument:
+    - "@LOG_REPOSITOTY"
+
+CITOYEN_CONTROLLER:
+  class: AppDAF\CONTROLLER\CitoyenController
+  argument:
+    - "@CITOYEN_SERVICE"
+    - "@LOG_SERVICE"
+
+ERROR_CONTROLLER:
+  class: AppDAF\CONTROLLER\ErrorController
+  argument: []
+
+CLOUD_SERVICE:
+  class: AppDAF\SERVICE\CloudService
+  argument: []

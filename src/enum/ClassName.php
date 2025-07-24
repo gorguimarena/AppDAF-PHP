@@ -1,9 +1,10 @@
 <?php
 namespace AppDAF\ENUM;
 
-enum ClassName : string{
+enum ClassName: string
+{
     case DATABASE = 'DATABASE';
-    
+
     case CITOYEN_REPOSITORY = 'CITOYEN_REPOSITORY';
     case LOG_REPOSITOTY = 'LOG_REPOSITOTY';
 
@@ -11,5 +12,6 @@ enum ClassName : string{
     case LOG_SERVICE = 'LOG_SERVICE';
 
     case CITOYEN_CONTROLLER = 'CITOYEN_CONTROLLER';
-
+    case ERROR_CONTROLLER = 'ERROR_CONTROLLER';
+    case CLOUD_SERVICE = 'CLOUD_SERVICE';
 }
